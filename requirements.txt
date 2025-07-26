@@ -1,0 +1,20 @@
+# RobotDog - Quadruped Robot Control System Dependencies
+# Core dependencies
+robot_hat>=2.0.0
+numpy>=1.19.0
+readchar>=2.0.0
+
+# Hardware interface dependencies
+spidev>=3.5
+gpiozero>=1.6.0
+smbus2>=0.4.0
+
+# Optional: Development dependencies
+# pytest>=6.0.0
+# pytest-cov>=2.10.0
+# black>=21.0.0
+# flake8>=3.8.0
+
+# Optional: Documentation dependencies
+# sphinx>=3.0.0
+# sphinx-rtd-theme>=0.5.0 

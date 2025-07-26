@@ -1,0 +1,23 @@
+# Include README and license files
+include README.md
+include LICENSE
+include requirements.txt
+
+# Include package data
+recursive-include byte *.conf
+recursive-include byte sounds/*
+recursive-include byte *.py
+
+# Include documentation
+recursive-include docs *.rst
+recursive-include docs *.md
+
+# Exclude development files
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude __pycache__
+global-exclude .DS_Store
+global-exclude .git*
+global-exclude *.egg-info
+global-exclude .pytest_cache
+global-exclude .coverage 
