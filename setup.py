@@ -15,7 +15,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='robotdog',
+    name='byte',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
@@ -28,11 +28,6 @@ setup(
 
     # The project's main homepage.
     url='https://github.com/matiasrodlo/byte',
-
-    # Author details
-    author='Matias Rodlo',
-    author_email='matias.rodlo@gmail.com',
-
     # Choose your license
     license='MIT',
     zip_safe=False,
