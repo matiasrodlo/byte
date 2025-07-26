@@ -2,6 +2,8 @@
 
 Byte is a Raspberry Pi–powered robotic dog that brings intelligent interaction, emotional expression, and agile movement to a compact, precision-engineered design. It responds to voice commands, recognizes faces, avoids obstacles, and reacts to touch—just like a real pet.
 
+<img width="1200" height="801" alt="image" src="https://github.com/user-attachments/assets/a75ad140-43c3-42d9-b60d-fe0a085a250a" />
+
 ## Features
 
 - **Facial Recognition**  
