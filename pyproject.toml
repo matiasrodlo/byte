@@ -3,17 +3,11 @@ requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "robotdog"
+name = "byte"
 dynamic = ["version"]
 description = "A comprehensive quadruped robot control system for Raspberry Pi"
 readme = "README.md"
 license = {text = "MIT"}
-authors = [
-    {name = "Matias Rodlo", email = "matias.rodlo@gmail.com"}
-]
-maintainers = [
-    {name = "Matias Rodlo", email = "matias.rodlo@gmail.com"}
-]
 keywords = ["robotics", "quadruped", "robot", "raspberry pi", "GPIO", "servo", "control", "IMU", "sensor"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -63,7 +57,7 @@ Repository = "https://github.com/matiasrodlo/byte"
 "Bug Tracker" = "https://github.com/matiasrodlo/byte/issues"
 
 [project.scripts]
-robotdog = "byte:__main__"
+byte = "byte.__main__:main"
 
 [tool.setuptools]
 packages = ["byte"]

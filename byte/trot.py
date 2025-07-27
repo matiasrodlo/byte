@@ -47,11 +47,19 @@ class Trot():
     LEG_RAISE_ORDER = [[1, 4], [2, 3]]  # Diagonal leg pairs: [front-left, rear-right], [front-right, rear-left]
     
     # Physical parameters (in mm)
-    LEG_STEP_HEIGHT = 20     # Height of leg lift during stepping
-    LEG_STEP_WIDTH = 100     # Width of leg movement
-    CENTER_OF_GRAVITY = -17  # Body center of gravity offset
-    LEG_STAND_OFFSET = 5     # Leg standing position offset
-    Z_ORIGIN = 80            # Base height of robot body
+    # ==========================
+    # Gait parameters optimized for trotting locomotion with diagonal leg pairs.
+    # Values determined through empirical testing and stability analysis.
+    # 
+    # Trotting gait characteristics:
+    # - Duty factor: 0.5 (50% contact time, 50% swing phase)
+    # - Diagonal pairs: Front-left + Rear-right, Front-right + Rear-left
+    # - Stability: 2-point support during swing phase
+    LEG_STEP_HEIGHT = 20     # Height of leg lift during stepping (mm) - ground clearance
+    LEG_STEP_WIDTH = 100     # Width of leg movement (mm) - forward stride length
+    CENTER_OF_GRAVITY = -17  # Body center of gravity offset (mm) - balance point adjustment
+    LEG_STAND_OFFSET = 5     # Leg standing position offset (mm) - neutral stance adjustment
+    Z_ORIGIN = 80            # Base height of robot body (mm) - default standing height
 
     TURNING_RATE = 0.5
     LEG_STAND_OFFSET_DIRS = [-1, -1, 1, 1]
@@ -94,12 +102,39 @@ class Trot():
         self.leg_origin = [self.leg_step_width[i] / 2 + self.y_offset + (
             self.leg_offset[i] * self.LEG_STEP_SCALES[self.lr+1][i]) for i in range(4)]
 
-    # Cosine
     def step_y_func(self, leg, step):
         """
-        Step function for y axis,
-        leg: current leg
-        step: current step
+        Trajectory function for forward/backward leg motion (Y-axis).
+        
+        Uses a cosine trajectory to generate smooth leg motion during the swing phase.
+        The trajectory follows a half-cosine wave from origin to target position.
+        
+        Mathematical Formulation:
+        ------------------------
+        θ = step · π / (STEP_COUNT - 1)  # Normalized phase [0, π]
+        y(step) = y_origin + (step_width/2) · (cos(θ) - direction) · direction
+        
+        This creates a smooth S-curve motion that minimizes acceleration at trajectory
+        endpoints, reducing mechanical stress and improving stability.
+        
+        Parameters:
+        -----------
+        leg : int
+            Leg index (0-3): Front-left, Front-right, Rear-left, Rear-right
+        step : int
+            Current step index within the section (0 to STEP_COUNT-1)
+        
+        Returns:
+        --------
+        float
+            Y-coordinate (forward position) in millimeters
+        
+        Notes:
+        ------
+        The cosine trajectory provides:
+        - Zero velocity at endpoints (smooth start/stop)
+        - Maximum velocity at midpoint
+        - Continuous acceleration profile
         """
         theta = step * pi / (self.STEP_COUNT-1)
         temp = (self.leg_step_width[leg] *
@@ -107,8 +142,39 @@ class Trot():
         y = self.leg_origin[leg] + temp
         return y
 
-    # Linear
     def step_z_func(self, step):
+        """
+        Trajectory function for vertical leg motion (Z-axis).
+        
+        Uses a linear trajectory for vertical leg lift during swing phase.
+        The leg lifts from ground level (Z_ORIGIN) to maximum height (Z_ORIGIN - STEP_HEIGHT).
+        
+        Mathematical Formulation:
+        ------------------------
+        z(step) = Z_ORIGIN - STEP_HEIGHT · (step / (STEP_COUNT - 1))
+        
+        This creates a constant-velocity vertical motion, which is acceptable for
+        the relatively small vertical displacement compared to horizontal motion.
+        
+        Parameters:
+        -----------
+        step : int
+            Current step index within the section (0 to STEP_COUNT-1)
+        
+        Returns:
+        --------
+        float
+            Z-coordinate (vertical position) in millimeters
+            - Higher values = lower position (closer to ground)
+            - Lower values = higher position (further from ground)
+        
+        Notes:
+        ------
+        Linear trajectory is used for vertical motion because:
+        - Vertical displacement is small (20 mm)
+        - Ground clearance requirements are less critical than horizontal precision
+        - Simpler computation than cosine trajectory
+        """
         return self.Z_ORIGIN - (self.LEG_STEP_HEIGHT * step / (self.STEP_COUNT-1))
 
     def get_coords(self):

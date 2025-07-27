@@ -56,7 +56,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=sudo python3 $user_home/byte/examples/12_app_control.py &
+ExecStart=sudo python3 $user_home/byte/samples/advanced/app_control.py &
 PrivateTmp=True
 User=$user
 Group=$user

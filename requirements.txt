@@ -1,4 +1,11 @@
 # RobotDog - Quadruped Robot Control System Dependencies
+# 
+# Note: This file is maintained for compatibility. The primary source of truth
+# for dependencies is pyproject.toml. For modern Python projects, use:
+#   pip install -e .
+# or
+#   pip install byte
+#
 # Core dependencies
 robot_hat>=2.0.0
 numpy>=1.19.0

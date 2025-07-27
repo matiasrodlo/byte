@@ -107,7 +107,7 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points={
         'console_scripts': [
-            'robotdog=byte:__main__',
+            'byte=byte.__main__:main',
         ],
     },
     
