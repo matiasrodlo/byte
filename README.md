@@ -1,43 +1,72 @@
-# Byte — AI Robotic Dog
+# Byte
 
-Byte is a Raspberry Pi–powered robotic dog that brings intelligent interaction, emotional expression, and agile movement to a compact, precision-engineered design. It responds to voice commands, recognizes faces, avoids obstacles, and reacts to touch—just like a real pet.
+A Raspberry Pi–powered robotic dog with intelligent interaction, emotional expression, and agile movement.
 
-<img width="1200" height="801" alt="image" src="https://github.com/user-attachments/assets/a75ad140-43c3-42d9-b60d-fe0a085a250a" />
+<img width="1200" height="801" alt="Byte Robot Dog" src="https://github.com/user-attachments/assets/a75ad140-43c3-42d9-b60d-fe0a085a250a" />
 
 ## Features
 
-- **Facial Recognition**  
-  Detects and responds to faces using a high-resolution camera module.
+- **Facial Recognition** - Detects and responds to faces
+- **Voice Interaction** - Understands spoken commands
+- **Touch Responsiveness** - Reacts to capacitive sensors
+- **Emotion Display** - Expresses through lights and sound
+- **Obstacle Avoidance** - Navigates safely with ultrasonic sensors
+- **Lifelike Movement** - 12 precision servos for natural motion
 
-- **Voice Interaction**  
-  Understands and executes spoken commands such as "sit", "walk", "bark", and "high five".
+## Quick Start
 
-- **Touch Responsiveness**  
-  Reacts naturally when touched using capacitive sensors embedded in its body.
+```bash
+# Install the package
+pip install byte
 
-- **Emotion Display**  
-  Expresses happiness, curiosity, and excitement through synchronized lights and sound.
+# Run a demo
+byte --demo
 
-- **Obstacle Avoidance**  
-  Uses ultrasonic sensors to perceive the environment and navigate safely in real time.
+# Or use in Python
+from byte import RobotDog
+my_dog = RobotDog()
+```
 
-- **Lifelike Movement**  
-  Equipped with 12 precision metal gear servos for walking, sitting, wagging its tail, scratching, stretching, and more.
+## Hardware
 
-## Technical Specifications
+| Component | Specification |
+|-----------|---------------|
+| Processor | Raspberry Pi 4 |
+| Camera | 5MP HD camera module |
+| Servos | 12× metal gear servos |
+| Sensors | Ultrasonic, touch, IMU, sound direction |
+| Display | RGB light panel |
+| Battery | 2× 18650 cells (1.5h runtime) |
+| Body | Aluminum alloy |
 
-| Specification         | Detail                                             |
-|----------------------|----------------------------------------------------|
-| Processor            | Raspberry Pi 4                                     |
-| Camera               | 5MP high-definition camera module                   |
-| Servos               | 12× metal gear high-torque servos                  |
-| Sensors              | Ultrasonic, touch, IMU (6-DOF), sound direction    |
-| LED Display          | RGB light panel for emotional feedback             |
-| Voice Commands       | Supports over 20 spoken commands                   |
-| Battery              | 2× 18650 lithium-ion cells                         |
-| Battery Life         | Approximately 1.5 hours                            |
-| Charging Time        | 2–3 hours                                          |
-| Materials            | Aluminum alloy body                                |
-| Connectivity         | WiFi / AP mode                                     |
-| Operating System     | Linux (Debian-based)                               |
-| Programming Language | Python (for optional customization)                |
+## Examples
+
+```python
+from byte import RobotDog
+
+# Initialize robot
+dog = RobotDog()
+
+# Basic movements
+dog.do_action('sit')
+dog.do_action('walk')
+dog.do_action('bark')
+
+# Sensor reading
+distance = dog.ultrasonic.read()
+touch = dog.dual_touch.read()
+
+# Cleanup
+dog.close()
+```
+
+## Documentation
+
+- **Core API**: `byte/` - Main robot control
+- **Examples**: `samples/` - Usage examples and tests
+- **AI Integration**: `mind/` - GPT, local LLM, and API integration
+- **System Scripts**: `bin/` - Installation and management
+
+## License
+
+MIT License - see LICENSE file for details.

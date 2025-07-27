@@ -16,10 +16,10 @@ while True:
     time.sleep(1)
 
 
-# from pidog import Pidog
+# from byte import RobotDog
 # import time
 
-# my_dog = Pidog()
+# my_dog = RobotDog()
     
 # DANGER_DISTANCE = 15
 
