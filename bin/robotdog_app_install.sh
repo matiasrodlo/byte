@@ -5,7 +5,6 @@
 # This script installs and configures the RobotDog system service,
 # WiFi hotspot functionality, and all necessary network services.
 #
-# Author: Matias Rodlo
 # Version: 1.0.0
 # License: MIT
 #

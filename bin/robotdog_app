@@ -6,7 +6,6 @@
 # It handles starting, stopping, and configuring the robot's services and
 # WiFi hotspot functionality.
 #
-# Author: Matias Rodlo
 # Version: 1.0.0
 # License: MIT
 #
